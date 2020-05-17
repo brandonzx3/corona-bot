@@ -1,2 +1,2 @@
 # corona-bot
-im losing my mond
+im losing my mind
