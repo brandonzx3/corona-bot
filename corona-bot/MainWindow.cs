@@ -44,6 +44,11 @@ namespace corona_bot
             Bitmap bitmap = (Bitmap)eventArgs.Frame.Clone();
             Image<Bgr, byte> grayImage = new Image<Bgr, byte>(bitmap);
             Rectangle[] rectangles = cascadeClassifier.DetectMultiScale(grayImage, 1.2, 1);
+            if(rectangles.Length != 0)
+            {
+                SendData("gamerTime");
+            }
+
             foreach(Rectangle rectangle in rectangles)
             {
                 using (Graphics graphics = Graphics.FromImage(bitmap))

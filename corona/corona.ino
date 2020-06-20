@@ -29,7 +29,7 @@ void setup() {
 
   //startup sequence
   servo.attach(servoPin);
-  servo.write(0);
+  servo.write(90);
   delay(1000);
 
   digitalWrite(motor1Dir1, HIGH);
