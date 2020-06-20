@@ -47,6 +47,9 @@ namespace corona_bot
             if(rectangles.Length != 0)
             {
                 SendData("gamerTime");
+            } else
+            {
+                SendData("notSoGamerTime");
             }
 
             foreach(Rectangle rectangle in rectangles)
