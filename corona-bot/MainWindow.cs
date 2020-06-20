@@ -85,7 +85,7 @@ namespace corona_bot
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            SendData("0");
+            SendData("stop");
             if (device.IsRunning)
             {
                 device.Stop();
