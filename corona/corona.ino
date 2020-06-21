@@ -5,12 +5,12 @@
 const int servoPin = 3;
 
 const int motor1Pwm = 11;
-const int motor2Pwm = 10;
+const int motor2Pwm = 5; //why the hell can this not work on pin 10 wtf
 
-const int motor1Dir1 = 9;
-const int motor1Dir2 = 8;
-const int motor2Dir1 = 12;
-const int motor2Dir2 = 13;
+const int motor1Dir1 = 12;
+const int motor1Dir2 = 13;
+const int motor2Dir1 = 9;
+const int motor2Dir2 = 8;
 
 
 Servo servo;
@@ -29,15 +29,15 @@ void setup() {
 
   //startup sequence
   servo.attach(servoPin);
-  servo.write(90);
+  servo.write(0);
   delay(1000);
 
   digitalWrite(motor1Dir1, HIGH);
   digitalWrite(motor2Dir1, HIGH);
   digitalWrite(motor1Dir2, LOW);
   digitalWrite(motor2Dir2, LOW);
-  analogWrite(motor1Pwm, 512);
-  analogWrite(motor2Pwm, 512);
+  analogWrite(motor1Pwm, 128);
+  analogWrite(motor2Pwm, 128);
   delay(1000);
   
   analogWrite(motor1Pwm, 0);
@@ -48,8 +48,8 @@ void setup() {
   digitalWrite(motor2Dir1, LOW);
   digitalWrite(motor1Dir2, HIGH);
   digitalWrite(motor2Dir2, HIGH);
-  analogWrite(motor1Pwm, 512);
-  analogWrite(motor2Pwm, 512);
+  analogWrite(motor1Pwm, 128);
+  analogWrite(motor2Pwm, 128);
   delay(1000);
 
   analogWrite(motor1Pwm, 0);
@@ -59,7 +59,7 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  if(Serial.available) {
+  if(Serial.available() > 0) {
      char state = Serial.read();
      if(state == "stop") {
       analogWrite(motor1Pwm, 0);
@@ -73,8 +73,8 @@ void loop() {
       digitalWrite(motor2Dir1, HIGH);
       digitalWrite(motor1Dir2, LOW);
       digitalWrite(motor2Dir2, LOW);
-      analogWrite(motor1Pwm, 1023);
-      analogWrite(motor2Pwm, 1023);
+      analogWrite(motor1Pwm, 255);
+      analogWrite(motor2Pwm, 255);
      }
 
      if(state == "notSoGamerTime") {
@@ -82,8 +82,8 @@ void loop() {
       digitalWrite(motor2Dir1, LOW);
       digitalWrite(motor1Dir2, LOW);
       digitalWrite(motor2Dir2, HIGH);
-      analogWrite(motor1Pwm, 512);
-      analogWrite(motor2Pwm, 512);
+      analogWrite(motor1Pwm, 128);
+      analogWrite(motor2Pwm, 128);
      }
   }
 }
