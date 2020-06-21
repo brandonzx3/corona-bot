@@ -75,6 +75,7 @@ void loop() {
       digitalWrite(motor2Dir2, LOW);
       analogWrite(motor1Pwm, 255);
       analogWrite(motor2Pwm, 255);
+      servo.write(90);
      }
 
      if(state == "notSoGamerTime") {
@@ -84,6 +85,7 @@ void loop() {
       digitalWrite(motor2Dir2, HIGH);
       analogWrite(motor1Pwm, 128);
       analogWrite(motor2Pwm, 128);
+      servo.write(90);
      }
   }
 }

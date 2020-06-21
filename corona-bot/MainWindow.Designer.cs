@@ -32,6 +32,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.posLabel = new System.Windows.Forms.Label();
+            this.sizeLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,11 +73,31 @@
             this.comboBox2.Size = new System.Drawing.Size(199, 21);
             this.comboBox2.TabIndex = 3;
             // 
+            // posLabel
+            // 
+            this.posLabel.AutoSize = true;
+            this.posLabel.Location = new System.Drawing.Point(979, 206);
+            this.posLabel.Name = "posLabel";
+            this.posLabel.Size = new System.Drawing.Size(35, 13);
+            this.posLabel.TabIndex = 4;
+            this.posLabel.Text = "label1";
+            // 
+            // sizeLabel
+            // 
+            this.sizeLabel.AutoSize = true;
+            this.sizeLabel.Location = new System.Drawing.Point(979, 251);
+            this.sizeLabel.Name = "sizeLabel";
+            this.sizeLabel.Size = new System.Drawing.Size(35, 13);
+            this.sizeLabel.TabIndex = 5;
+            this.sizeLabel.Text = "label1";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1133, 589);
+            this.Controls.Add(this.sizeLabel);
+            this.Controls.Add(this.posLabel);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.pictureBox1);
@@ -86,6 +108,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -95,6 +118,8 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label posLabel;
+        private System.Windows.Forms.Label sizeLabel;
     }
 }
 

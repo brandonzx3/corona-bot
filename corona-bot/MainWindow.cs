@@ -46,26 +46,60 @@ namespace corona_bot
             Rectangle[] rectangles = cascadeClassifier.DetectMultiScale(grayImage, 1.2, 1);
             if(rectangles.Length != 0)
             {
-                SendData("gamerTime");
+
+                Rectangle largestRect = rectangles.Aggregate((r1, r2) =>
+                    (r1.Height * r1.Width) > (r2.Height * r2.Width) ? r1 : r2);
+
+                int posX = largestRect.X;
+                int posY = largestRect.Y;
+
+                int width = largestRect.Width;
+                int height = largestRect.Height;
+
+                //i hate this bullshit LET ME EDIT LABELS ON A DIFFERENT THREAD GODAMMIT
+                this.BeginInvoke((System.Windows.Forms.MethodInvoker)delegate ()
+                {
+                    posLabel.Text = $"X:{posX.ToString()} Y:{posY.ToString()}";
+                    sizeLabel.Text = $"width:{width.ToString()} height:{height.ToString()}";
+                });
+
+                //these are placeholder numbers
+                if(largestRect.X > 280)
+                {
+                    SendData("turnRight");
+                } else if(largestRect.X < 220)
+                {
+                    SendData("turnLeft");
+                } else
+                {
+                    if(largestRect.Width >= 300 && largestRect.Height >= 300)
+                    {
+                        SendData("kill");
+                    } else
+                    {
+                        SendData("gamerTime");
+                    }
+                }
+
+                foreach (Rectangle rectangle in rectangles)
+                {
+                    
+                    using (Graphics graphics = Graphics.FromImage(bitmap))
+                    {
+                        using (Pen pen = new Pen(Color.Red, 1))
+                        {
+                            graphics.DrawRectangle(pen, rectangle);
+                        }
+                    }
+                }
             } else
             {
                 SendData("notSoGamerTime");
             }
-
-            foreach(Rectangle rectangle in rectangles)
-            {
-                using (Graphics graphics = Graphics.FromImage(bitmap))
-                {
-                    using (Pen pen = new Pen(Color.Red, 1))
-                    {
-                        graphics.DrawRectangle(pen, rectangle);
-                    }
-                }
-            }
             pictureBox1.Image = bitmap;
         }
 
-        static readonly CascadeClassifier cascadeClassifier = new CascadeClassifier("haarcascade_fullbody.xml");
+        static readonly CascadeClassifier cascadeClassifier = new CascadeClassifier("haarcascade_frontalface_default.xml");
 
         void SendData(string data)
         {
@@ -89,6 +123,8 @@ namespace corona_bot
             ports = SerialPort.GetPortNames();
             comboBox2.Items.AddRange(ports);
             comboBox2.SelectedIndex = 0;
+            posLabel.Text = "";
+            sizeLabel.Text = "";
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
